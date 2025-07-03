@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ToDoData } from '../service/data/to-do-data';
 
-class Todo {
+export class Todo {
   constructor(
     public id: number,
     public description: string,
-    public done: boolean,
+    public isDone: boolean,
     public targetDate: Date
   ) {}
 }
@@ -17,10 +18,11 @@ class Todo {
   styleUrl: './list-todoscomponent.css'
 })
 export class ListTodoscomponent implements OnInit {
-  todos = [
-    new Todo(1, 'Learn Angular', false, new Date()),
-    new Todo(2, 'Learn React', false, new Date()),
-    new Todo(3, 'Learn Vue', false, new Date())
+  todos :Todo[] =[];
+  // [
+  //   new Todo(1, 'Learn Angular', false, new Date()),
+  //   new Todo(2, 'Learn React', false, new Date()),
+  //   new Todo(3, 'Learn Vue', false, new Date())
   //   {
   //   id: 1,
   //   description: 'Learn Angular'
@@ -33,14 +35,21 @@ export class ListTodoscomponent implements OnInit {
   //   id: 3,
   //   description: 'Learn Vue'
   // }
-];
+// ];
 
-  constructor() {
+  constructor(
+    private service : ToDoData
+  ) {
     // Initialization code can go here if needed
   }
 
   ngOnInit() {
-
+    this.service.retrieveAllTodos('Praveen').subscribe(
+      response=>{
+        console.log(response);
+        this.todos = response;
+      }
+    );
   }
 
 }

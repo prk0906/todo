@@ -1,5 +1,12 @@
 <h1>Welcome!</h1>
 
-<div>Welcome {{ name }}. Welcome to the Angular application!
+<div class="container">Welcome {{ name }}. Welcome to the Angular application!
     You can manage your todos <a href="/todos">here</a>
+</div>
+<div class="container">
+    Click here to get a customized welcome message
+    <button (click)="getWelcomeMessageWithParameter()" class="btn btn-success">Get Welcome Message</button>
+</div>
+<div class="container" *ngIf="welcomeMessageFromService">
+    <h2>Your customized Welcome Message {{welcomeMessageFromService}}</h2>
 </div>
