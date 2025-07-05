@@ -8,11 +8,16 @@ import { ListTodoscomponent, Todo } from '../../list-todoscomponent/list-todosco
 export class ToDoData {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  retrieveAllTodos(username:string)
-    {
-      return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
-    }
+  retrieveAllTodos(username: string) {
+    return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
+  }
+  deleteTodo(username:string,id:number){
+    return this.http.delete(`http://localhost:8080/users/${username}/todos/${id}`)
+  }
+  retrieveTodo(username:string,id:number){
+    return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`)
+  }
 }
